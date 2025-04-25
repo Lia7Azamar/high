@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruta TSP con Hill Climbing</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Ruta TSP con Hill Climbing</h1>
+    <button onclick="obtenerRuta()">Mostrar resultado</button>
+
+    <div id="resultado">
+      <h3>Ruta calculada:</h3>
+      <p id="ruta"></p>
+      <h3>Distancia total:</h3>
+      <p id="distancia"></p>
+    </div>
+  </div>
+
+  <script>
+    function obtenerRuta() {
+      fetch('/tsp')
+        .then(response => response.json())
+        .then(data => {
+          const ruta = data.ruta.join(' → ');
+          const distancia = data.distancia_total;
+
+          document.getElementById("ruta").textContent = ruta;
+          document.getElementById("distancia").textContent = distancia + " unidades";
+          document.getElementById("resultado").style.display = 'block';
+        })
+        .catch(error => {
+          document.getElementById("resultado").innerText = "Error al obtener la ruta: " + error;
+        });
+    }
+  </script>
+
+</body>
+</html>
