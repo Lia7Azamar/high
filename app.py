@@ -58,7 +58,5 @@ def tsp():
     distancia_total = evalua_ruta(ruta)
     return jsonify({"ruta": ruta, "distancia_total": distancia_total})
 
-if __name__ == '__main__':
-    from os import environ
-    app.run(host='0.0.0.0', port=int(environ.get("PORT", 5000)))
+
 
